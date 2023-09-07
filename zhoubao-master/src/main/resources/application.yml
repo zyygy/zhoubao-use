@@ -1,0 +1,57 @@
+#yml可以把所有Profile的配置属性都放在一个application.yml文件中 通过---进行分割
+#这里没有指定spring.profiles因此这里的属性对全部prifile都生效
+spring:
+  #  mvc:
+  #    static-path-pattern: /resources/**
+  #配置静态资源
+  resources:
+    static-locations: file:${zhoubao.location},  classpath:/static/
+  datasource:
+    # 数据库基本配置
+    url: jdbc:mysql://127.0.0.1:3306/zhoubao?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT
+    username: root
+    password: root
+  jpa:
+    # 这里对spring data jpa与数据库列进行关联的方式进行修改
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    # 显示后台处理的SQL语句
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+server:
+  port: 3000
+#配置周报相关位置
+zhoubao:
+  database-config: #周报数据库配置
+    name: zhoubao
+    username: root
+    password: root
+  oss-type: local #local或minio 当为minio时需要填写minio-config中的内容；当为local时文件保存在location对应的路径
+  location: D:/zhoubao-master1/zhoubao #周报存储位置
+  minio-config:
+    endpoint: http://127.0.0.1:9000
+    access-key: minioadmin
+    secret-key: minioadmin
+
+
+
+
+---
+# 下边的部分对设置的spring环境属性生效
+# prod 环境配置
+spring:
+  profiles: prod
+zhoubao:
+  database-config: #周报数据库配置
+    name: zhoubao
+    username: root
+    password: root
+  oss-type: local #local或minio 当为minio时需要填写minio-config中的内容；当为local时文件保存在location对应的路径
+  location: D:/zhoubao-master1/zhoubao #周报存储位置
+  minio-config:
+    endpoint: http://127.0.0.1:9000
+    access-key: minioadmin
+    secret-key: minioadmin
