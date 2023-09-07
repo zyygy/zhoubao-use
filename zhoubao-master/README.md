@@ -39,11 +39,11 @@
 #配置周报相关位置      
 zhoubao:
 	#周报存储位置
-    location: D:/ipv6download/ 
+    location: D:/ipv6download/                  //自己创建一个文件夹，存储的周报信息都会保存在这里
     #周报数据库配置
     database-config: 
       #数据库名
-      name: YourDatabaseName 
+      name: YourDatabaseName                     
       #数据库用户
       username: username
       #数据库密码
@@ -56,5 +56,24 @@ zhoubao:
 > `java -jar zhoubao.jar --spring.profiles.active=prod`）
 
 ## 启动项目
+前端执行：
+1.在vue控制台中输入npm run dev    
+2.若出现报错在控制台输入npm install webpack-dev-server  加载web包  
+3.输入npm install
+4.重新进入控制台输入npm run dev
 
-在ide中直接启动或者打包为jar后启动
+后端执行：
+1.在idea中运行后端项目，打开进入之后点击new-->Project from Existing Sources 选择文件下载解压后的路径，选择
+2.选择maven 点击创建，创建项目。
+3.修改application.yml中的数据库配置。包括      url: jdbc:mysql://127.0.0.1:3306/zhoubao?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT
+                                            username: root
+                                           password: root
+其中数据库名称及名字和密码也需要更改；
+4。将zhoubao.sql导进数据库，添加好用户账号密码即可。
+## 报错情况
+1.若出现数据库无法连接问题，或者忘记数据库mysql密码，可以参照https://zhuanlan.zhihu.com/p/561515580解决，修改密码。
+2.数据库连接问题还有可能是被占用端口，需要进入windous下的services关闭禁用其他mysql服务，再次点击运行即可。
+
+
+
+
